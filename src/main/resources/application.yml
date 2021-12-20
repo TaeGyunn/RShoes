@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/rshoes?characterEncoding=UTF-8&serverTimezone=UTC
+    username: rshoes
+    password: 1234
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
