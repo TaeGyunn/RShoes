@@ -9,6 +9,7 @@
         <id column="uno" property="userNo"/>
         <result column="id" property="id"/>
         <result column="pw" property="pw"/>
+        <result column="email" property="email"/>
         <result column="phone" property="phone"/>
         <result column="bank" property="bank"/>
         <result column="accnt" property="account"/>
@@ -20,5 +21,28 @@
         FROM user u
         WHERE u.uno = #{userNo}
     </select>
+
+    <select id="checkById" resultType="boolean">
+        SELECT IF(COUNT(*) = 1, 1, 0)
+        FROM user u
+        WHERE u.id = #{id}
+    </select>
+
+    <select id="checkByEmail" resultType="boolean">
+        SELECT IF(COUNT(*) = 1, 1, 0)
+        FROM user u
+        WHERE u.email = #{email}
+    </select>
+
+    <select id="checkByPhone" resultType="boolean">
+        SELECT IF(COUNT(*) = 1, 1, 0)
+        FROM user u
+        WHERE u.phone = #{phone}
+    </select>
+
+    <insert id="join">
+        INSERT INTO user(id, pw, email,phone, bank, accnt)
+        VALUES (#{id}, #{pw}, #{email}, #{phone}, #{bank}, #{account})
+    </insert>
 
 </mapper>
