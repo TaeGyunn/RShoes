@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 public class JoinDTO {
     
     @NotBlank(message = "id를 입력해주세요")
-    private String id;
+    private String userId;
 
     @NotBlank(message = "pw를 입력해주세요")
     @Size(min = 8, max = 20, message = "비밀번호는 8자 이상 20자 이하로 입력해주세요")
