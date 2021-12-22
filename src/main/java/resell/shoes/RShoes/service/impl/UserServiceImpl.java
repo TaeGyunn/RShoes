@@ -104,6 +104,23 @@ public class UserServiceImpl implements UserService {
         return response.success(map, "브랜드 생성이 성공했습니다.",HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<?> findId(String email, String name) {
+
+        Map<String, String> map = new HashMap<>();
+
+        User user = userRepository.findByEmailAndName(email, name).orElse(null);
+        if(user == null){
+            map.put("find", "fail");
+            return response.fail(map, "이메일과 이름에 일치하는 아이디가 없습니다", HttpStatus.OK);
+        }
+
+        map.put("find", "success");
+        map.put("id", user.getId());
+        return response.success(map, "아이디 찾기 성공", HttpStatus.OK);
+
+    }
+
 
     @Override
     public ResponseEntity<?> join(JoinDTO join) {

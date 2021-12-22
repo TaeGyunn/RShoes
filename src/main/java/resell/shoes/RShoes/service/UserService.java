@@ -18,4 +18,6 @@ public interface UserService {
     ResponseEntity<?> checkByPhone(String phone);
 
     ResponseEntity<?> insertBrand(InsertBrandDTO brand);
+
+    ResponseEntity<?> findId(String email, String name);
 }

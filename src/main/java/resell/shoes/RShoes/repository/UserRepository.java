@@ -24,8 +24,6 @@ public interface UserRepository {
     // 유저 회원가입
     Integer join(JoinDTO join);
 
-
-
-
-
+    // 이메일, 이름 확인
+    Optional<User> findByEmailAndName(String email, String name);
 }

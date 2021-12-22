@@ -37,6 +37,12 @@ public class LoginController {
         return userService.checkByPhone(phone);
     }
 
+    @GetMapping("/findId/{email}/{name}")
+    public ResponseEntity<?> findId(@PathVariable(name = "email") String email,
+                                    @PathVariable(name = "name") String name){
+
+        return userService.findId(email, name);
+    }
 
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody JoinDTO join, Errors errors){
@@ -48,7 +54,6 @@ public class LoginController {
         return userService.join(join);
     }
 
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO login, Errors errors){
 
@@ -58,6 +63,8 @@ public class LoginController {
 
         return userService.login(login);
     }
+
+
 
 
 
