@@ -9,6 +9,7 @@
         <id column="uno" property="userNo"/>
         <result column="id" property="id"/>
         <result column="pw" property="pw"/>
+        <result column="name" property="userName"/>
         <result column="email" property="email"/>
         <result column="phone" property="phone"/>
         <result column="bank" property="bank"/>
@@ -40,9 +41,15 @@
         WHERE u.phone = #{phone}
     </select>
 
+    <select id="findByEmailAndName" resultMap="user">
+        SELECT *
+        FROM user u
+        WHERE u.email = #{email} AND u.name = #{name}
+    </select>
+
     <insert id="join">
-        INSERT INTO user(id, pw, email,phone, bank, accnt)
-        VALUES (#{userId}, #{pw}, #{email}, #{phone}, #{bank}, #{account})
+        INSERT INTO user(id, pw, name, email, phone, bank, accnt)
+        VALUES (#{userId}, #{pw}, ${userName},#{email}, #{phone}, #{bank}, #{account})
     </insert>
 
 </mapper>
