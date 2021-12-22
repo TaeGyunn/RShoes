@@ -49,7 +49,7 @@
 
     <insert id="join">
         INSERT INTO user(id, pw, name, email, phone, bank, accnt)
-        VALUES (#{userId}, #{pw}, ${userName},#{email}, #{phone}, #{bank}, #{account})
+        VALUES (#{userId}, #{pw}, #{userName},#{email}, #{phone}, #{bank}, #{account})
     </insert>
 
 </mapper>
