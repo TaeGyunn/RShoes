@@ -17,6 +17,7 @@ public class User implements UserDetails {
     private Long userNo;       // 유저번호
     private String id;      // 아이디
     private String pw;      // 비밀번호
+    private String userName;    // 이름
     private String email;   // 이메일
     private String phone;   // 핸드폰번호
     private String bank;    // 은행명
