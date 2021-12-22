@@ -11,9 +11,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import resell.shoes.RShoes.dto.InsertBrandDTO;
 import resell.shoes.RShoes.dto.JoinDTO;
 import resell.shoes.RShoes.dto.LoginDTO;
 import resell.shoes.RShoes.dto.UserResponseDTO;
+import resell.shoes.RShoes.entity.Brand;
+import resell.shoes.RShoes.entity.User;
+import resell.shoes.RShoes.repository.BrandRepository;
 import resell.shoes.RShoes.repository.UserRepository;
 import resell.shoes.RShoes.service.UserService;
 import resell.shoes.RShoes.util.JwtTokenProvider;
@@ -29,6 +33,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final BrandRepository brandRepository;
     private final Response response;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -41,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
         if(userRepository.checkById(id)){
             map.put("duplicate","true");
-            return response.success(map, "아이디가 중복입니다", HttpStatus.OK);
+            return response.fail(map, "아이디가 중복입니다", HttpStatus.OK);
         }
 
         map.put("duplicate", "false");
@@ -55,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
         if(userRepository.checkByEmail(email)){
             map.put("duplicate","true");
-            return response.success(map, "이메일이 중복입니다", HttpStatus.OK);
+            return response.fail(map, "이메일이 중복입니다", HttpStatus.OK);
         }
 
         map.put("duplicate", "false");
@@ -69,12 +74,36 @@ public class UserServiceImpl implements UserService {
 
         if(userRepository.checkByPhone(phone)){
             map.put("duplicate","true");
-            return response.success(map, "번호가 중복입니다", HttpStatus.OK);
+            return response.fail(map, "번호가 중복입니다", HttpStatus.OK);
         }
 
         map.put("duplicate", "false");
         return response.success(map, "사용가능한 번호 입니다", HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<?> insertBrand(InsertBrandDTO brand) {
+
+        Map<String, String> map = new HashMap<>();
+        if(brandRepository.checkByName(brand.getBrandName())){
+            map.put("duplicate","true");
+            return response.fail(map, "브랜드이름이 중복입니다.", HttpStatus.OK);
+        }
+
+        User user = userRepository.findById(brand.getUserId()).orElse(null);
+        if(user == null){
+            map.put("id","uncorrect");
+            return response.fail(map,"유저가 없습니다.", HttpStatus.OK);
+        }
+
+        Brand newBrand = new Brand(user, brand.getBrandName());
+
+        brandRepository.insertBrand(newBrand);
+
+        map.put("insert","success");
+        return response.success(map, "브랜드 생성이 성공했습니다.",HttpStatus.OK);
+    }
+
 
     @Override
     public ResponseEntity<?> join(JoinDTO join) {
@@ -93,7 +122,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<?> login(LoginDTO login) {
 
-        if(userRepository.findById(login.getId()).orElse(null) == null){
+        if(userRepository.findById(login.getUserId()).orElse(null) == null){
             return response.fail("유저가 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
 

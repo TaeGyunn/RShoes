@@ -19,7 +19,7 @@
     <select id="findById" resultMap="user">
         SELECT *
         FROM user u
-        WHERE u.uno = #{userNo}
+        WHERE u.id = #{id}
     </select>
 
     <select id="checkById" resultType="boolean">
@@ -42,7 +42,7 @@
 
     <insert id="join">
         INSERT INTO user(id, pw, email,phone, bank, accnt)
-        VALUES (#{id}, #{pw}, #{email}, #{phone}, #{bank}, #{account})
+        VALUES (#{userId}, #{pw}, #{email}, #{phone}, #{bank}, #{account})
     </insert>
 
 </mapper>
