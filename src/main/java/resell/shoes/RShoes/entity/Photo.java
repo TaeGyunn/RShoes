@@ -12,4 +12,9 @@ public class Photo {
     private String originalName;  // 원본명
     private String serverName;   // 서버파일명
 
+    public Photo(Shoes shoes, String originalName, String serverName){
+        this.shoes = shoes;
+        this.originalName = originalName;
+        this.serverName = serverName;
+    }
 }
