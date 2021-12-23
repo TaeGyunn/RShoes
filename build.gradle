@@ -24,11 +24,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.0'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	//jwt
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+	//aws
+	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.228')
+	implementation 'com.amazonaws:aws-java-sdk-s3'
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
