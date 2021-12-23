@@ -1,2 +1,2 @@
 # RShoes
-Resell Shoes
+중고 신발 리셀 사이트
