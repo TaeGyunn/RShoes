@@ -18,6 +18,12 @@
         WHERE c.name = #{categoryName}
     </select>
 
+    <select id="findByName" resultMap="category">
+        SELECT *
+        FROM category c
+        WHERE c.name = #{categoryName}
+    </select>
+
     <insert id="insertCategory">
         INSERT INTO category(name)
         VALUES(#{categoryName})
@@ -26,7 +32,6 @@
     <delete id="deleteCategory">
         DELETE FROM category c
         WHERE c.name = #{categoryName}
-
     </delete>
 
 
