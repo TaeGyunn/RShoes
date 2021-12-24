@@ -29,6 +29,12 @@
         WHERE b.name = #{brandName}
     </select>
 
+    <select id="findByName" resultMap="brand">
+        SELECT *
+        FROM brand b
+        WHERE b.name = #{brandName}
+    </select>
+
     <insert id="insertBrand">
         INSERT INTO brand(uno, name)
         VALUES(#{user.userNo}, #{brandName})

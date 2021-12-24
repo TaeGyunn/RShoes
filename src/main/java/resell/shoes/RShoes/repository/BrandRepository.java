@@ -11,4 +11,7 @@ public interface BrandRepository {
     
     // 브랜드 기입
     Integer insertBrand(Brand brand);
+    
+    // 브랜드 찾기
+    Brand findByName(String brandName);
 }
