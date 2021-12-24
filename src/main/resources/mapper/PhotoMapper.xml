@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="resell.shoes.RShoes.repository.PhotoRepository">
+
+    <resultMap id="photo" type="resell.shoes.RShoes.entity.Photo">
+
+        <id column="pno" property="photoNo"/>
+        <result column="ori_name" property="originalName"/>
+        <result column="stod_name" property="serverName"/>
+        <association property="shoes" javaType="resell.shoes.RShoes.entity.Shoes">
+            <id column="sno" property="shoesNo"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertPhoto">
+        INSERT INTO photo(sno, ori_name, stod_name)
+        VALUES(#{shoes.shoesNo}, #{originalName}, #{serverName})
+    </insert>
+
+
+
+</mapper>
