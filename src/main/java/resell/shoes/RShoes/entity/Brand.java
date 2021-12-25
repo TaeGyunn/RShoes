@@ -1,10 +1,11 @@
 package resell.shoes.RShoes.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Brand {
     
     private Long brandNo;       // 브랜드 번호

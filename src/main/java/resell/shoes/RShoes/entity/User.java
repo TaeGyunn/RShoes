@@ -12,6 +12,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
 
     private Long userNo;       // 유저번호

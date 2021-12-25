@@ -1,10 +1,11 @@
 package resell.shoes.RShoes.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Category {
     
     private Long categoryNo;       // 카테고리 번호
