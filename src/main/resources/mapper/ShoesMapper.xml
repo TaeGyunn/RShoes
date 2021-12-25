@@ -21,7 +21,7 @@
 
     </resultMap>
 
-    <insert id="insertShoes" useGeneratedKeys="true" keyProperty="sno">
+    <insert id="insertShoes" keyProperty="sno">
 
         INSERT INTO shoes(bno, cno, name, price, color, size)
         VALUES(#{brand.brandNo}, #{category.categoryNo}, #{shoesName}, #{price}, #{color}, #{size})
