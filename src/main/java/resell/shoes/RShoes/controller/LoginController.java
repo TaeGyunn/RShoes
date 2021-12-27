@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import resell.shoes.RShoes.dto.FindLoginDTO;
 import resell.shoes.RShoes.dto.JoinDTO;
 import resell.shoes.RShoes.dto.LoginDTO;
 import resell.shoes.RShoes.service.Helper;
@@ -37,15 +39,8 @@ public class LoginController {
         return userService.checkByPhone(phone);
     }
 
-    @GetMapping("/findId/{email}/{name}")
-    public ResponseEntity<?> findId(@PathVariable(name = "email") String email,
-                                    @PathVariable(name = "name") String name){
-
-        return userService.findId(email, name);
-    }
-
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody JoinDTO join, Errors errors){
+    public ResponseEntity<?> join(@Validated @RequestBody JoinDTO join, Errors errors){
 
         if(errors.hasErrors()){
             return response.invalidFields(Helper.refineErrors(errors));
@@ -55,7 +50,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO login, Errors errors){
+    public ResponseEntity<?> login(@Validated @RequestBody LoginDTO login, Errors errors){
 
         if(errors.hasErrors()){
             return response.invalidFields(Helper.refineErrors(errors));
@@ -63,6 +58,13 @@ public class LoginController {
 
         return userService.login(login);
     }
+
+    @PostMapping("/findId")
+    public ResponseEntity<?> findId(@Validated @RequestBody FindLoginDTO.FindIdDTO findId){
+
+       return userService.findId(findId.getEmail(), findId.getUserName());
+    }
+
 
 
 

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import resell.shoes.RShoes.dto.CategoryDTO;
 import resell.shoes.RShoes.service.AdminService;
@@ -20,7 +21,7 @@ public class AdminController {
     private final Response response;
 
     @PostMapping(value = "/insertCategory")
-    public ResponseEntity<?> addCategory(@RequestBody CategoryDTO category, Errors errors){
+    public ResponseEntity<?> addCategory(@Validated @RequestBody CategoryDTO category, Errors errors){
 
         if(errors.hasErrors()){
             return response.invalidFields(Helper.refineErrors(errors));
@@ -30,7 +31,7 @@ public class AdminController {
     }
 
     @DeleteMapping(value = "/deleteCategory")
-    public ResponseEntity<?> deleteCategory(@RequestBody CategoryDTO category, Errors errors){
+    public ResponseEntity<?> deleteCategory(@Validated @RequestBody CategoryDTO category, Errors errors){
 
         if(errors.hasErrors()){
             return response.invalidFields(Helper.refineErrors(errors));
