@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import resell.shoes.RShoes.dto.CategoryDTO;
 import resell.shoes.RShoes.repository.CategoryRepository;
 import resell.shoes.RShoes.service.AdminService;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 @Slf4j
 public class AdminServiceImpl implements AdminService {
