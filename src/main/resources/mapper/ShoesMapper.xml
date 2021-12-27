@@ -21,10 +21,25 @@
 
     </resultMap>
 
-    <insert id="insertShoes" keyProperty="sno">
+    <insert id="insertShoes" useGeneratedKeys="true" keyColumn="sno" keyProperty="shoesNo">
 
         INSERT INTO shoes(bno, cno, name, price, color, size)
         VALUES(#{brand.brandNo}, #{category.categoryNo}, #{shoesName}, #{price}, #{color}, #{size})
 
+
     </insert>
+
+    <update id="modifyShoes">
+
+        UPDATE shoes
+        SET
+        bno = if(bno = #{brand.brandNo},bno, #{brand.brandNo}),
+        cno = if(cno = #{category.categoryNo}, cno, #{category.categoryNo}),
+        name = if(name = #{shoesName}, name, #{shoesName}),
+        price = if(price = #{price}, price, #{price}),
+        color = if(color = #{color}, color, #{color}),
+        size = if(size = #{size}, size, #{size})
+        WHERE sno = #{shoesNo}
+
+    </update>
 </mapper>

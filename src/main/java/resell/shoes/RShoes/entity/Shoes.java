@@ -3,7 +3,6 @@ package resell.shoes.RShoes.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -16,9 +15,9 @@ public class Shoes {
     private String shoesName;   // 이름
     private Integer price;      // 가격
     private String color;       // 색상
-    private String size;        // 사이즈
+    private Integer size;        // 사이즈
 
-    public Shoes(Brand brand, Category category, String shoesName, Integer price, String color, String size){
+    public Shoes(Brand brand, Category category, String shoesName, Integer price, String color, Integer size){
         this.brand = brand;
         this.category = category;
         this.shoesName = shoesName;

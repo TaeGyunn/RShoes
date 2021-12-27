@@ -7,4 +7,6 @@ import resell.shoes.RShoes.entity.Shoes;
 public interface ShoesRepository {
 
     Long insertShoes(Shoes shoes);
+
+    Long modifyShoes(Shoes shoes);
 }

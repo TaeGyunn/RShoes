@@ -15,10 +15,22 @@
         </association>
     </resultMap>
 
+    <select id="findBySno" resultMap="photo" resultType="List">
+        SELECT *
+        FROM photo
+        WHERE sno = #{shoesNo}
+    </select>
+
     <insert id="insertPhoto">
         INSERT INTO photo(sno, ori_name, stod_name)
         VALUES(#{shoes.shoesNo}, #{originalName}, #{serverName})
     </insert>
+
+    <delete id="deletePhoto">
+        DELETE FROM photo
+        WHERE sno = #{photoNo}
+    </delete>
+
 
 
 
