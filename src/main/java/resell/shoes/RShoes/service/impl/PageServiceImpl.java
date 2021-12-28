@@ -30,22 +30,14 @@ public class PageServiceImpl implements PageService {
     private final PageRepository pageRepository;
     private final PhotoRepository photoRepository;
     private final S3Service s3Service;
-    private final Response response;
 
     @Override
-    public ResponseEntity<?> getAllShoes(int page) {
-
+    public Page<PageShoesDTO> getAllShoes(int page) {
         PageHelper.startPage(page, 10);
 
-        Page<Shoes> getShoes = pageRepository.getAllShoes(page);
+        Page<PageShoesDTO> getShoes = pageRepository.getAllShoesDTO(page);
 
-        Page<PageShoesDTO> shoesList = new Page<>();
-        List<PageShoesDTO> list = getShoes.stream().map(PageShoesDTO::new).collect(Collectors.toList());
-        for(PageShoesDTO pageShoesDTO : list){
-            shoesList.add(pageShoesDTO);
-        }
-
-        for(PageShoesDTO pageShoesDTO : shoesList){
+        for(PageShoesDTO pageShoesDTO : getShoes){
             List<Photo> photos = photoRepository.findBySno(pageShoesDTO.getShoesNo());
             List<String> url = new ArrayList<>();
             for(Photo photo : photos){
@@ -53,7 +45,7 @@ public class PageServiceImpl implements PageService {
             }
             pageShoesDTO.setUrl(url);
         }
-
-        return response.success(shoesList, "상품 전체 목록", HttpStatus.OK);
+        return getShoes;
     }
+
 }

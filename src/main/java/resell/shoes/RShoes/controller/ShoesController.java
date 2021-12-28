@@ -1,16 +1,16 @@
 package resell.shoes.RShoes.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import resell.shoes.RShoes.dto.DeleteShoesDTO;
-import resell.shoes.RShoes.dto.InsertBrandDTO;
-import resell.shoes.RShoes.dto.InsertShoesDTO;
-import resell.shoes.RShoes.dto.ModifyShoesDTO;
+import resell.shoes.RShoes.dto.*;
 import resell.shoes.RShoes.service.Helper;
 import resell.shoes.RShoes.service.PageService;
 import resell.shoes.RShoes.service.ShoesService;
@@ -33,7 +33,9 @@ public class ShoesController {
     @GetMapping("/pageShoes/{page}")
     public ResponseEntity<?> getPageShoes(@PathVariable(name = "page") int page){
 
-        return pageService.getAllShoes(page);
+        PageInfo<PageShoesDTO> p = new PageInfo<>(pageService.getAllShoes(page));
+
+        return response.success(p,"신발 전체 페이징", HttpStatus.OK);
     }
 
     @PostMapping("/user/insertShoes")

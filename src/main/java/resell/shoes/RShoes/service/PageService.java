@@ -1,8 +1,10 @@
 package resell.shoes.RShoes.service;
 
+import com.github.pagehelper.Page;
 import org.springframework.http.ResponseEntity;
+import resell.shoes.RShoes.dto.PageShoesDTO;
 
 public interface PageService {
 
-    ResponseEntity<?> getAllShoes(int page);
+    Page<PageShoesDTO> getAllShoes(int page);
 }
