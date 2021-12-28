@@ -12,6 +12,7 @@ import resell.shoes.RShoes.dto.InsertBrandDTO;
 import resell.shoes.RShoes.dto.InsertShoesDTO;
 import resell.shoes.RShoes.dto.ModifyShoesDTO;
 import resell.shoes.RShoes.service.Helper;
+import resell.shoes.RShoes.service.PageService;
 import resell.shoes.RShoes.service.ShoesService;
 import resell.shoes.RShoes.service.UserService;
 import resell.shoes.RShoes.util.Response;
@@ -26,7 +27,14 @@ public class ShoesController {
     private final UserService userService;
     private final ShoesService shoesService;
     private final Response response;
+    private final PageService pageService;
 
+
+    @GetMapping("/pageShoes/{page}")
+    public ResponseEntity<?> getPageShoes(@PathVariable(name = "page") int page){
+
+        return pageService.getAllShoes(page);
+    }
 
     @PostMapping("/user/insertShoes")
     public ResponseEntity<?> insertShoes(@Validated @RequestPart InsertShoesDTO shoes,

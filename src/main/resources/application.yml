@@ -13,3 +13,8 @@ spring:
 mybatis:
   type-aliases-package: resell.shoes.Rshoes.entity
   mapper-locations: mapper/*.xml
+
+pagehelper:
+  helperDialect: mariadb
+  reasonable : true
+  support-methods-arguments: true

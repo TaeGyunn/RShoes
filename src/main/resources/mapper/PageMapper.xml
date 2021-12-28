@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="resell.shoes.RShoes.repository.PageRepository">
+
+    <resultMap id="shoes" type="resell.shoes.RShoes.entity.Shoes">
+
+        <id column="sno" property="shoesNo"/>
+        <result column="name" property="shoesName"/>
+        <result column="price" property="price"/>
+        <result column="color" property="color"/>
+        <result column="size" property="size"/>
+        <association property="brand" javaType="resell.shoes.RShoes.entity.Brand">
+            <id column="bno" property="brandNo"/>
+            <result column ="name" property="brandName"/>
+        </association>
+        <association property="category" javaType="resell.shoes.RShoes.entity.Category">
+            <id column="cno" property="categoryNo"/>
+            <result column ="name" property="categoryName"/>
+        </association>
+
+    </resultMap>
+
+
+    <select id="getAllShoes" resultType="resell.shoes.RShoes.entity.Shoes" resultMap="shoes">
+        SELECT s.sno, s.bno, s.cno, s.name, s.price, s.color, s.size, b.name, c.name
+        FROM shoes s
+        INNER JOIN brand b
+        on b.bno = s.bno
+        INNER JOIN category c
+        on c.cno = s.cno
+
+    </select>
+
+</mapper>

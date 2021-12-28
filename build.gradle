@@ -26,6 +26,7 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.4.1'
 
 	//jwt
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'

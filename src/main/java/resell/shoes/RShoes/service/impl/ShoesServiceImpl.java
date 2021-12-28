@@ -1,8 +1,10 @@
 package resell.shoes.RShoes.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.Server;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import resell.shoes.RShoes.service.ShoesService;
 import resell.shoes.RShoes.util.Response;
 
 import java.awt.*;
+import java.awt.print.Pageable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,5 +170,6 @@ public class ShoesServiceImpl implements ShoesService {
         map.put("delete", true);
         return response.success(map, "상품 삭제가 완료되었습니다.", HttpStatus.OK);
     }
+
 
 }

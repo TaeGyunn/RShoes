@@ -16,4 +16,6 @@ public interface ShoesService {
     ResponseEntity<?> modifyShoes(ModifyShoesDTO modifyShoesDTO, List<MultipartFile> files);
 
     ResponseEntity<?> deleteShoes(DeleteShoesDTO shoes);
+
+
 }
