@@ -26,15 +26,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseEntity<?> insertCategory(CategoryDTO category) {
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, Boolean> map = new HashMap<>();
 
         if(categoryRepository.checkByName(category.getName())) {
-            map.put("duplicate", "true");
+            map.put("duplicate", true);
             return response.fail(map, "카테고리가 존재합니다", HttpStatus.OK);
         }
 
         if(categoryRepository.insertCategory(category) == 1){
-            map.put("insert", "success");
+            map.put("insert", true);
             return response.success(map, "카테고리 생성 성공", HttpStatus.OK);
         }
 
@@ -44,12 +44,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseEntity<?> deleteCategory(CategoryDTO category) {
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, Boolean> map = new HashMap<>();
 
         if(categoryRepository.checkByName(category.getName())){
 
             categoryRepository.deleteCategory(category);
-            map.put("delete", "success");
+            map.put("delete", true);
             return response.success(map, "카테고리 삭제 성공", HttpStatus.OK);
         }
 
