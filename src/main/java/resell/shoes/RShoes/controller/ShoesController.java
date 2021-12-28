@@ -7,6 +7,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import resell.shoes.RShoes.dto.DeleteShoesDTO;
 import resell.shoes.RShoes.dto.InsertBrandDTO;
 import resell.shoes.RShoes.dto.InsertShoesDTO;
 import resell.shoes.RShoes.dto.ModifyShoesDTO;
@@ -28,19 +29,15 @@ public class ShoesController {
 
 
     @PostMapping("/user/insertShoes")
-    public ResponseEntity<?> insertShoes(@Validated@RequestPart InsertShoesDTO shoes,
-                                         @RequestPart List<MultipartFile> files,
-                                         Errors errors){
+    public ResponseEntity<?> insertShoes(@Validated @RequestPart InsertShoesDTO shoes,
+                                         @RequestPart List<MultipartFile> files){
 
-        if(errors.hasErrors()){
-            return response.invalidFields(Helper.refineErrors(errors));
-        }
 
         return shoesService.insertShoes(shoes, files);
     }
 
     @PostMapping("/user/insertBrand")
-    public ResponseEntity<?> insertBrand(@Validated@RequestBody InsertBrandDTO brand, Errors errors){
+    public ResponseEntity<?> insertBrand(@Validated @RequestBody InsertBrandDTO brand, Errors errors){
 
         if(errors.hasErrors()){
             return response.invalidFields(Helper.refineErrors(errors));
@@ -54,6 +51,17 @@ public class ShoesController {
                                         @RequestPart(required = false) List<MultipartFile> files){
 
         return shoesService.modifyShoes(shoes, files);
+    }
+
+    @DeleteMapping("/user/deleteShoes")
+    public ResponseEntity<?> deleteShoes(@Validated @RequestBody DeleteShoesDTO shoes,
+                                         Errors errors){
+
+        if(errors.hasErrors()){
+            return response.invalidFields(Helper.refineErrors(errors));
+        }
+
+        return shoesService.deleteShoes(shoes);
     }
 
 

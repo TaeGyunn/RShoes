@@ -21,6 +21,22 @@
 
     </resultMap>
 
+    <select id="findByShoesNo" resultMap="shoes">
+
+        SELECT *
+        FROM shoes s
+        WHERE s.sno = #{shoesNo}
+
+    </select>
+
+    <select id="checkByUserIdAndBno" resultType="Boolean">
+        SELECT IF(COUNT(*) = 1, 1, 0)
+        FROM brand b
+        WHERE b.bno = #{brandNo}
+        AND b.uno = #{userNo}
+
+    </select>
+
     <insert id="insertShoes" useGeneratedKeys="true" keyColumn="sno" keyProperty="shoesNo">
 
         INSERT INTO shoes(bno, cno, name, price, color, size)
@@ -42,4 +58,11 @@
         WHERE sno = #{shoesNo}
 
     </update>
+
+    <delete id="deleteShoes">
+
+        DELETE FROM shoes s
+        WHERE s.sno = #{shoesNo}
+
+    </delete>
 </mapper>

@@ -2,6 +2,7 @@ package resell.shoes.RShoes.service;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
+import resell.shoes.RShoes.dto.DeleteShoesDTO;
 import resell.shoes.RShoes.dto.InsertShoesDTO;
 import resell.shoes.RShoes.dto.ModifyShoesDTO;
 
@@ -13,4 +14,6 @@ public interface ShoesService {
 
 
     ResponseEntity<?> modifyShoes(ModifyShoesDTO modifyShoesDTO, List<MultipartFile> files);
+
+    ResponseEntity<?> deleteShoes(DeleteShoesDTO shoes);
 }

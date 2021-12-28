@@ -14,4 +14,7 @@ public interface BrandRepository {
     
     // 브랜드 찾기
     Brand findByName(String brandName);
+    
+    // 브랜드 소유 확인
+    Boolean checkByUserIdAndBno(Long brandNo, Long userNo);
 }
