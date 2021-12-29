@@ -21,6 +21,7 @@ import resell.shoes.RShoes.util.Response;
 
 import java.awt.*;
 import java.awt.print.Pageable;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,16 +56,26 @@ public class ShoesServiceImpl implements ShoesService {
             return response.fail(map, "브랜드를 찾을 수 없습니다", HttpStatus.BAD_REQUEST);
         }
 
-        Shoes shoes = new Shoes(brand,
+        User user = userRepository.findById(insertShoesDTO.getUserId()).orElse(null);
+        if(user == null){
+            map.put("insert", false);
+            return response.fail(map, "아이디를 찾을 수 없습니다", HttpStatus.BAD_REQUEST);
+        }
+
+        Shoes shoes = new Shoes(
+                brand,
                 category,
+                user,
                 insertShoesDTO.getName(),
                 insertShoesDTO.getPrice(),
                 insertShoesDTO.getColor(),
-                insertShoesDTO.getSize());
+                insertShoesDTO.getSize(),
+                LocalDateTime.now());
+
 
        shoesRepository.insertShoes(shoes);
 
-       shoes.setShoesNo(shoes.getShoesNo());
+       shoes.changeShoesNo(shoes.getShoesNo());
 
       List<Photo> photos =  s3Service.uploadFile(files, shoes);
 
@@ -97,26 +108,24 @@ public class ShoesServiceImpl implements ShoesService {
             map.put("delete", false);
             return response.fail(map, "유저id를 확인해주세요", HttpStatus.BAD_REQUEST);
         }
-        if(brand.getUser().getUserNo() != user.getUserNo()){
-            map.put("delete", false);
-            return response.fail(map, "유저의 상품이 아닙니다.", HttpStatus.BAD_REQUEST);
-        }
+
 
 
 
         Shoes shoes = new Shoes(
-                modifyShoesDTO.getShoesNo(),
                 brand,
                 category,
+                user,
                 modifyShoesDTO.getName(),
                 modifyShoesDTO.getPrice(),
                 modifyShoesDTO.getColor(),
-                modifyShoesDTO.getSize());
+                modifyShoesDTO.getSize(),
+                LocalDateTime.now());
 
         shoesRepository.modifyShoes(shoes);
 
 
-        shoes.setShoesNo(modifyShoesDTO.getShoesNo());
+        shoes.changeShoesNo(modifyShoesDTO.getShoesNo());
 
 
         if(files != null){
@@ -129,7 +138,7 @@ public class ShoesServiceImpl implements ShoesService {
             photos =  s3Service.uploadFile(files, shoes);
 
             for(Photo photo : photos){
-                photo.setShoes(shoes);
+                photo.changeShoes(shoes);
                 photoRepository.insertPhoto(photo);
             }
 
@@ -153,11 +162,7 @@ public class ShoesServiceImpl implements ShoesService {
         User user = userRepository.findById(shoesDTO.getUserId()).orElse(null);
         if(user == null) {
             map.put("delete", false);
-            return response.fail(map, "유저id를 확인해주세요", HttpStatus.BAD_REQUEST);
-        }
-        if(!brandRepository.checkByUserIdAndBno(shoes.getBrand().getBrandNo(), user.getUserNo())){
-            map.put("delete", false);
-            return response.fail(map, "유저의 상품이 아닙니다.", HttpStatus.BAD_REQUEST);
+            return response.fail(map, "유저 id를 확인해주세요", HttpStatus.BAD_REQUEST);
         }
 
         List<Photo> photos = photoRepository.findBySno(shoesDTO.getShoesNo());

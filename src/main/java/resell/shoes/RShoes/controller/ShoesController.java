@@ -24,7 +24,6 @@ import java.util.List;
 @RestController
 public class ShoesController {
 
-    private final UserService userService;
     private final ShoesService shoesService;
     private final Response response;
     private final PageService pageService;
@@ -46,19 +45,9 @@ public class ShoesController {
         return shoesService.insertShoes(shoes, files);
     }
 
-    @PostMapping("/user/insertBrand")
-    public ResponseEntity<?> insertBrand(@Validated @RequestBody InsertBrandDTO brand, Errors errors){
-
-        if(errors.hasErrors()){
-            return response.invalidFields(Helper.refineErrors(errors));
-        }
-
-        return userService.insertBrand(brand);
-    }
-
     @PutMapping("/user/modifyShoes")
     public ResponseEntity<?> modifyShoes(@Validated @RequestPart ModifyShoesDTO shoes,
-                                        @RequestPart(required = false) List<MultipartFile> files){
+                                         @RequestPart(required = false) List<MultipartFile> files){
 
         return shoesService.modifyShoes(shoes, files);
     }
@@ -73,10 +62,5 @@ public class ShoesController {
 
         return shoesService.deleteShoes(shoes);
     }
-
-
-
-
-
 
 }
