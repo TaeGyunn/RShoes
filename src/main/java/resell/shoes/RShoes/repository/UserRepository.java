@@ -18,7 +18,7 @@ public interface UserRepository {
     // email 중복검사
     Boolean checkByEmail(String email);
     
-    // phonenumber 중복검사
+    // number 중복검사
     Boolean checkByPhone(String phone);
     
     // 유저 회원가입

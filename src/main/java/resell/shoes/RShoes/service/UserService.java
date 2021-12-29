@@ -1,7 +1,6 @@
 package resell.shoes.RShoes.service;
 
 import org.springframework.http.ResponseEntity;
-import resell.shoes.RShoes.dto.InsertBrandDTO;
 import resell.shoes.RShoes.dto.JoinDTO;
 import resell.shoes.RShoes.dto.LoginDTO;
 
@@ -17,7 +16,6 @@ public interface UserService {
 
     ResponseEntity<?> checkByPhone(String phone);
 
-    ResponseEntity<?> insertBrand(InsertBrandDTO brand);
-
     ResponseEntity<?> findId(String email, String name);
+
 }

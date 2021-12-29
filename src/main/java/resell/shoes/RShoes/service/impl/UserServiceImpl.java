@@ -11,10 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import resell.shoes.RShoes.dto.InsertBrandDTO;
-import resell.shoes.RShoes.dto.JoinDTO;
-import resell.shoes.RShoes.dto.LoginDTO;
-import resell.shoes.RShoes.dto.UserResponseDTO;
+import resell.shoes.RShoes.dto.*;
 import resell.shoes.RShoes.entity.Brand;
 import resell.shoes.RShoes.entity.User;
 import resell.shoes.RShoes.repository.BrandRepository;
@@ -35,7 +32,6 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final BrandRepository brandRepository;
     private final Response response;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -81,29 +77,6 @@ public class UserServiceImpl implements UserService {
 
         map.put("duplicate", false);
         return response.success(map, "사용가능한 번호 입니다", HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<?> insertBrand(InsertBrandDTO brand) {
-
-        Map<String, Boolean> map = new HashMap<>();
-        if(brandRepository.checkByName(brand.getBrandName())){
-            map.put("insert", false);
-            return response.fail(map, "브랜드이름이 중복입니다.", HttpStatus.OK);
-        }
-
-        User user = userRepository.findById(brand.getUserId()).orElse(null);
-        if(user == null){
-            map.put("id", null);
-            return response.fail(map,"유저가 없습니다.", HttpStatus.OK);
-        }
-
-        Brand newBrand = new Brand(user, brand.getBrandName());
-
-        brandRepository.insertBrand(newBrand);
-
-        map.put("insert", true);
-        return response.success(map, "브랜드 생성이 성공했습니다.",HttpStatus.OK);
     }
 
     @Override

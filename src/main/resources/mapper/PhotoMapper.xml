@@ -31,7 +31,4 @@
         WHERE sno = #{photoNo}
     </delete>
 
-
-
-
 </mapper>
