@@ -36,9 +36,14 @@
     </select>
 
     <insert id="insertBrand">
-        INSERT INTO brand(uno, name)
-        VALUES(#{user.userNo}, #{brandName})
+        INSERT INTO brand(name)
+        VALUES(#{brandName})
     </insert>
+
+    <delete id="deleteBrand">
+        DELETE FROM brand b
+        WHERE b.name = #{brandName}
+    </delete>
 
 
 

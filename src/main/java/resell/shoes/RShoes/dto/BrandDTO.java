@@ -7,11 +7,8 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @RequiredArgsConstructor
-public class InsertBrandDTO {
-    
-    
-    private String userId;
-    
+public class BrandDTO {
+
     @NotBlank(message = "브랜드명을 입력해주세요")
     private String brandName;
 
