@@ -1,10 +1,9 @@
 package resell.shoes.RShoes.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
-@Data
+@Getter
 @NoArgsConstructor
 public class Category {
     

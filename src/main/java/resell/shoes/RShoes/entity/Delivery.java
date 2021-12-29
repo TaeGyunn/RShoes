@@ -1,10 +1,10 @@
 package resell.shoes.RShoes.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import resell.shoes.RShoes.dto.Status;
 
-@Data
+@Getter
 @RequiredArgsConstructor
 public class Delivery {
 

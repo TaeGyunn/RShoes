@@ -1,9 +1,11 @@
 package resell.shoes.RShoes.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 
-@Data
+@Getter
 @RequiredArgsConstructor
 public class Photo {
 
@@ -17,4 +19,6 @@ public class Photo {
         this.originalName = originalName;
         this.serverName = serverName;
     }
+
+    public void changeShoes(Shoes shoes){this.shoes = shoes;}
 }
