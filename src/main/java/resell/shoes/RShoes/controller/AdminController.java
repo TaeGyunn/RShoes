@@ -23,8 +23,9 @@ public class AdminController {
     private final Response response;
     private final CategoryService categoryService;
     private final BrandService brandService;
-
-    @PostMapping(value = "/insertBrand")
+    
+    //브랜드생성
+    @PostMapping("/insertBrand")
     public ResponseEntity<?> insertBrand(@Validated @RequestBody BrandDTO brand, Errors errors){
 
         if(errors.hasErrors()){
@@ -34,8 +35,9 @@ public class AdminController {
         return brandService.insertBrand(brand);
 
     }
-
-    @PostMapping(value = "/insertCategory")
+    
+    //카테고리 생성
+    @PostMapping("/insertCategory")
     public ResponseEntity<?> addCategory(@Validated @RequestBody CategoryDTO category, Errors errors){
 
         if(errors.hasErrors()){
@@ -46,7 +48,19 @@ public class AdminController {
 
     }
 
-    @DeleteMapping(value = "/deleteCategory")
+    //브랜드 삭제
+    @DeleteMapping("/deleteBrand")
+    public ResponseEntity<?> deleteBrand(@Validated @RequestBody BrandDTO brand, Errors errors){
+
+        if(errors.hasErrors()){
+            return response.invalidFields(Helper.refineErrors(errors));
+        }
+
+        return brandService.deleteBrand(brand);
+    }
+    
+    //카테고리 삭제
+    @DeleteMapping("/deleteCategory")
     public ResponseEntity<?> deleteCategory(@Validated @RequestBody CategoryDTO category, Errors errors){
 
         if(errors.hasErrors()){

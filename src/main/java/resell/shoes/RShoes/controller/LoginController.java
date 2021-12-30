@@ -20,25 +20,29 @@ public class LoginController {
 
     private final Response response;
     private final UserService userService;
-
+    
+    //아이디 중복 체크
     @GetMapping("/checkById/{id}")
     public ResponseEntity<?> checkById(@PathVariable(name = "id") String id){
 
         return userService.checkById(id);
     }
-
+    
+    //이메일 중복 체크
     @GetMapping("/checkByEmail/{email}")
     public ResponseEntity<?> checkByEmail(@PathVariable(name = "email") String email){
 
         return userService.checkByEmail(email);
     }
-
+    
+    //핸드폰 중복 체크
     @GetMapping("/checkByPhone/{phone}")
     public ResponseEntity<?> checkByPhone(@PathVariable(name = "phone") String phone){
 
         return userService.checkByPhone(phone);
     }
-
+    
+    //회원가입
     @PostMapping("/join")
     public ResponseEntity<?> join(@Validated @RequestBody JoinDTO join, Errors errors){
 
@@ -48,7 +52,8 @@ public class LoginController {
 
         return userService.join(join);
     }
-
+    
+    //로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@Validated @RequestBody LoginDTO login, Errors errors){
 
@@ -58,16 +63,12 @@ public class LoginController {
 
         return userService.login(login);
     }
-
+    
+    //아이디찾기
     @PostMapping("/findId")
     public ResponseEntity<?> findId(@Validated @RequestBody FindLoginDTO.FindIdDTO findId){
 
        return userService.findId(findId.getEmail(), findId.getUserName());
     }
-
-
-
-
-
 
 }
