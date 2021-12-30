@@ -48,4 +48,38 @@
 
     </select>
 
+    <select id="getBrandShoesDTO" resultType="resell.shoes.RShoes.dto.PageShoesDTO" resultMap="shoesDTO">
+        SELECT s.sno, s.bno, s.cno, s.name, s.price, s.color, s.size, b.name as brandName, c.name as categoryName
+        FROM shoes s
+        INNER JOIN brand b
+        ON b.bno = s.bno
+        INNER JOIN category c
+        ON c.cno = s.cno
+        WHERE s.bno = #{brandNo}
+
+    </select>
+
+    <select id="getCategoryShoesDTO" resultType="resell.shoes.RShoes.dto.PageShoesDTO" resultMap="shoesDTO">
+
+        SELECT s.sno, s.bno, s.cno, s.name, s.price, s.color, s.size, b.name as brandName, c.name as categoryName
+        FROM shoes s
+        INNER JOIN brand b
+        ON b.bno = s.bno
+        INNER JOIN category c
+        ON c.cno = s.cno
+        WHERE s.cno = #{categoryNo}
+
+    </select>
+
+    <select id="getShoesDetailDTO" resultType="resell.shoes.RShoes.dto.PageShoesDTO" resultMap="shoesDTO">
+
+        SELECT s.sno, s.bno, s.cno, s.name, s.price, s.color, s.size, b.name as brandName, c.name as categoryName
+        FROM shoes s
+        INNER JOIN brand b
+        ON b.bno = s.bno
+        INNER JOIN category c
+        ON c.cno = s.cno
+        WHERE s.cno = #{categoryNo}
+        AND s.bno = #{brandNo}
+    </select>
 </mapper>
