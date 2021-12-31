@@ -18,4 +18,12 @@ public class Order_shoes {
     private String payment;         // 결제수단
     private LocalDateTime orderDate; //주문시간
 
+    public Order_shoes(User buyUser, Shoes orderShoes, Delivery orderDelivery, Pay orderPay, String payment) {
+        this.buyUser = buyUser;
+        this.orderShoes = orderShoes;
+        this.orderDelivery = orderDelivery;
+        this.orderPay = orderPay;
+        this.payment = payment;
+    }
+
 }

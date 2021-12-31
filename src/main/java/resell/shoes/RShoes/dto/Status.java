@@ -1,17 +1,14 @@
 package resell.shoes.RShoes.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum Status {
-    ALREADY(1),
-    READY(2),
-    START(3),
-    ARRIVE(4);
+    READY("READY"),
+    START("START"),
+    ARRIVE("ARRIVE");
 
-    private final int code;
-
-    public int getCode(){
-        return code;
-    }
-    Status(int code){
-        this.code = code;
-    }
+    private final String value;
 }

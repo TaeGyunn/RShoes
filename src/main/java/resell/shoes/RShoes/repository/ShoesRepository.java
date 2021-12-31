@@ -20,4 +20,6 @@ public interface ShoesRepository {
     // 상품삭제
     void deleteShoes(Long shoesNo);
 
+    void modifyIno(Long InventoryNo, Long shoesNo);
+
 }

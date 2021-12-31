@@ -8,7 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Inventory {
 
-    private Long inventoryNo;       //인벤토리no
+    private Long inventoryNo;
 
     private String inventoryStatus; //상태
+
+    public Inventory(String inventoryStatus){
+        this.inventoryStatus = inventoryStatus;
+    }
+
+
 }

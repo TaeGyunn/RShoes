@@ -59,6 +59,14 @@
 
     </update>
 
+    <update id="modifyIno">
+
+        UPDATE shoes
+        SET ino = #{inventoryNo}
+        WHERE sno = #{shoesNo}
+
+    </update>
+
     <delete id="deleteShoes">
 
         DELETE FROM shoes s

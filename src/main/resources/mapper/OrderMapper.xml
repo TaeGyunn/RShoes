@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="resell.shoes.RShoes.repository.OrderRepository">
+
+    <resultMap id="order" type="resell.shoes.RShoes.entity.Order_shoes">
+
+        <id column="ono" property="orderNo"/>
+        <result column="payment" property="payment"/>
+        <result column="date" property="orderDate"/>
+        <association property="buyUser">
+            <id column="uno" property="userNo"/>
+        </association>
+        <association property="orderShoes">
+            <id column="sno" property="shoesNo"/>
+        </association>
+        <association property="orderDelivery">
+            <id column="dno" property="deliveryNo"/>
+        </association>
+        <association property="orderPay">
+            <id column="pano" property="payNo"/>
+        </association>
+
+    </resultMap>
+
+    <insert id="insertOrder">
+
+        INSERT INTO order_shoes(sno, dno, uno, pano, payment)
+        VALUES(#{orderShoes.shoesNo}, #{orderDelivery.deliveryNo}, #{buyUser.userNo}, #{orderPay.payNo}, #{payment})
+
+    </insert>
+
+
+</mapper>

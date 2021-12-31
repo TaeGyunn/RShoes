@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="resell.shoes.RShoes.repository.PayRepository">
+
+    <resultMap id="pay" type="resell.shoes.RShoes.entity.Pay">
+
+        <id column="pano" property="payNo"/>
+        <result column="name" property="payName"/>
+        <result column="type" property="payType"/>
+        <result column="pdt" property="payCreateTime"/>
+        <result column="content" property="payContent"/>
+
+    </resultMap>
+
+
+    <insert id="insertPay">
+
+        INSERT pay(name, type, content)
+        VALUES(#{payName}, #{payType}, #{payContent})
+
+        <selectKey keyProperty="pano" resultType="Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+    </insert>
+
+    <select id="findByPano" resultType="pay">
+        SELECT *
+        FROM pay p
+        WHERE p.pano = #{pano}
+    </select>
+</mapper>
