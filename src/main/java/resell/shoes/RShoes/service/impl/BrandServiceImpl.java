@@ -6,6 +6,7 @@ import org.apache.http.protocol.HTTP;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import resell.shoes.RShoes.dto.BrandDTO;
 import resell.shoes.RShoes.repository.BrandRepository;
 import resell.shoes.RShoes.service.BrandService;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class BrandServiceImpl implements BrandService {
 
