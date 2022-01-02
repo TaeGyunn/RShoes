@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepository.insertOrder(order_shoes);
 
-        Inventory inventory = new Inventory("상품 검수중");
+        Inventory inventory = new Inventory(Status.Inspection);
 
         Long inventoryNo = inventoryRepository.insertInventory(inventory);
 

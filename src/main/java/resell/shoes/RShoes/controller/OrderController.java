@@ -20,7 +20,8 @@ public class OrderController {
 
     private final Response response;
     private final OrderService orderService;
-
+    
+    // 주문하기
     @PostMapping("/user/order")
     public ResponseEntity<?> orderShoes(@Validated @RequestBody OrderDTO order,
                                         Errors errors){

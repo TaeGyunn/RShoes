@@ -6,6 +6,8 @@ import resell.shoes.RShoes.entity.Order_shoes;
 @Repository
 public interface OrderRepository {
 
-
     void insertOrder(Order_shoes order_shoes);
+
+    Order_shoes findByShoesAndUser(Long shoesNo, Long userNo);
+
 }

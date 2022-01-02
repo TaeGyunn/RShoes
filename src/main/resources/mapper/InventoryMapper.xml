@@ -24,4 +24,11 @@
 
     </insert>
 
+    <update id="modifyInventory">
+        UPDATE inventory
+        SET status =
+        WHERE sno = #{shoesNo}
+
+    </update>
+
 </mapper>

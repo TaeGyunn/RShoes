@@ -29,9 +29,17 @@
 
         SELECT *
         FROM delivery d
-        WHERE d.dno = #{dno}
+        WHERE d.dno = #{deliveryNo}
 
     </select>
+
+    <update id="modifyStatus">
+
+        UPDATE delivery
+        SET status = #{status}
+        WHERE dno = #{deliveryNo}
+
+    </update>
 
 
 

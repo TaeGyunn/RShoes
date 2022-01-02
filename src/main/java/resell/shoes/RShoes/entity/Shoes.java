@@ -3,6 +3,7 @@ package resell.shoes.RShoes.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import resell.shoes.RShoes.dto.Status;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class Shoes {
     private Integer price;      // 가격
     private String color;       // 색상
     private Integer size;        // 사이즈
-    private String status;  //제품상태
+    private Status status;  //제품상태
     private LocalDateTime createDateTime;
 
     public Shoes(Brand brand, Category category, User user, String shoesName, Integer price, String color, Integer size, LocalDateTime createDateTime){
@@ -35,5 +36,6 @@ public class Shoes {
     }
 
     public void changeShoesNo(Long shoesNo){this.shoesNo = shoesNo;}
+    public void changeStatus(Status status){this.status = status;}
 
 }

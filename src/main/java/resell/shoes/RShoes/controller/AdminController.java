@@ -8,10 +8,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import resell.shoes.RShoes.dto.CategoryDTO;
 import resell.shoes.RShoes.dto.BrandDTO;
+import resell.shoes.RShoes.dto.InventoryDTO;
 import resell.shoes.RShoes.repository.BrandRepository;
 import resell.shoes.RShoes.service.BrandService;
 import resell.shoes.RShoes.service.CategoryService;
 import resell.shoes.RShoes.service.Helper;
+import resell.shoes.RShoes.service.InventoryService;
 import resell.shoes.RShoes.util.Response;
 
 @RestController
@@ -22,6 +24,7 @@ public class AdminController {
 
     private final Response response;
     private final CategoryService categoryService;
+    private final InventoryService inventoryService;
     private final BrandService brandService;
     
     //브랜드생성
@@ -47,6 +50,19 @@ public class AdminController {
         return categoryService.insertCategory(category);
 
     }
+
+    //주문상품 검수
+    @PutMapping("/checkInventory/")
+    public ResponseEntity<?> checkInventory(@Validated @RequestBody InventoryDTO inventory, Errors errors){
+
+        if(errors.hasErrors()){
+            return response.invalidFields(Helper.refineErrors(errors));
+        }
+
+        return inventoryService.checkInventory(inventory);
+
+    }
+
 
     //브랜드 삭제
     @DeleteMapping("/deleteBrand")

@@ -32,5 +32,14 @@
 
     </insert>
 
+    <select id="findByShoesAndUser" resultMap="order">
+
+        SELECT *
+        FROM order_shoes o
+        WHERE o.sno = #{shoesNo}
+        AND o.uno = #{userNo}
+
+    </select>
+
 
 </mapper>

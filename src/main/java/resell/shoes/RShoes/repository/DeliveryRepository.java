@@ -11,5 +11,8 @@ public interface DeliveryRepository {
     Long insertDelivery(Delivery delivery);
 
     //delivery 가져오기
-    Delivery findByDno(Long dno);
+    Delivery findByDno(Long deliveryNo);
+
+    //status 수정하기
+    void modifyStatus(Long deliveryNo, String status);
 }

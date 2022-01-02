@@ -18,4 +18,8 @@ public class Delivery {
         this.zip_code = zip_code;
         this.status = status;
     }
+
+    public void changeStatus(Status status){
+        this.status = status;
+    }
 }
