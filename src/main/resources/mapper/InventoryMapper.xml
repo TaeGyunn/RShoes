@@ -22,5 +22,16 @@
 
     </insert>
 
+    <update id="modifyStatus">
+
+        UPDATE inventory
+        SET
+        manager = #{manager},
+        status = #{inventoryStatus},
+        date = #{InspectionTime}
+        WHERE ino = #{inventoryNo}
+
+    </update>
+
 
 </mapper>

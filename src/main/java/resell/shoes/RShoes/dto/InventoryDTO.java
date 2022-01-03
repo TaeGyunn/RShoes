@@ -7,15 +7,11 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class InventoryDTO {
 
-    @NotBlank
-    private Long shoesNo;
+    private Long shoesNo;       //신발No
 
-    @NotBlank
-    private String userId;
+    private String userId;      //adminId
 
-    @NotBlank
-    private Long deliveryNo;
+    private Long deliveryNo;    //배달no
 
-    @NotBlank
-    private Boolean check;
+    private Boolean check;      //검수결과
 }

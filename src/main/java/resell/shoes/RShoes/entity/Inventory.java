@@ -3,6 +3,8 @@ package resell.shoes.RShoes.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
+import resell.shoes.RShoes.dto.InsertShoesDTO;
 import resell.shoes.RShoes.dto.Status;
 
 import java.time.LocalDateTime;
@@ -19,10 +21,11 @@ public class Inventory {
 
     private LocalDateTime InspectionTime;
 
-    public Inventory(Long inventoryNo, Status inventoryStatus, String manager) {
+    public Inventory(Long inventoryNo, Status inventoryStatus, String manager, LocalDateTime InspectionTime) {
         this.inventoryNo = inventoryNo;
         this.inventoryStatus = inventoryStatus;
         this.manager = manager;
+        this.InspectionTime = InspectionTime;
     }
 
     public Inventory(Status inventoryStatus){

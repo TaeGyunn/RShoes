@@ -8,6 +8,6 @@ public interface OrderRepository {
 
     void insertOrder(Order_shoes order_shoes);
 
-    Order_shoes findByShoesAndUser(Long shoesNo, Long userNo);
+    Order_shoes findByShoes(Long shoesNo);
 
 }

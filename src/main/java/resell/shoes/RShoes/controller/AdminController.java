@@ -52,7 +52,7 @@ public class AdminController {
     }
 
     //주문상품 검수
-    @PutMapping("/checkInventory/")
+    @PutMapping("/checkInventory")
     public ResponseEntity<?> checkInventory(@Validated @RequestBody InventoryDTO inventory, Errors errors){
 
         if(errors.hasErrors()){

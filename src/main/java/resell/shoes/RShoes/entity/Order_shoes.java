@@ -1,13 +1,14 @@
 package resell.shoes.RShoes.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Order_shoes {
 
     private Long orderNo;           // 주문번호

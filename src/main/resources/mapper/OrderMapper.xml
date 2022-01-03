@@ -32,12 +32,11 @@
 
     </insert>
 
-    <select id="findByShoesAndUser" resultMap="order">
+    <select id="findByShoes" resultMap="order">
 
-        SELECT *
+        SELECT o.*
         FROM order_shoes o
         WHERE o.sno = #{shoesNo}
-        AND o.uno = #{userNo}
 
     </select>
 
