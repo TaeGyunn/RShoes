@@ -42,7 +42,6 @@ public class OrderServiceImpl implements OrderService {
                 Status.READY);
 
         Long dno = deliveryRepository.insertDelivery(delivery);
-        delivery = deliveryRepository.findByDno(dno);
 
         Pay pay = new Pay(
                 order.getPayName(),
@@ -52,11 +51,12 @@ public class OrderServiceImpl implements OrderService {
         );
 
 
-        Long pano = payRepository.insertPay(pay);
-        pay = payRepository.findByPano(pano);
+        Long pno = payRepository.insertPay(pay);
+
 
         User buyUser = userRepository.findById(order.getUserId()).orElse(null);
         Shoes shoes = shoesRepository.findByShoesNo(order.getShoesNo());
+
         Order_shoes order_shoes = new Order_shoes(
                 buyUser,
                 shoes,
@@ -65,13 +65,14 @@ public class OrderServiceImpl implements OrderService {
                 order.getPayment()
         );
 
+
         orderRepository.insertOrder(order_shoes);
 
         Inventory inventory = new Inventory(Status.Inspection);
 
         Long inventoryNo = inventoryRepository.insertInventory(inventory);
 
-        shoesRepository.modifyIno(inventoryNo, order.getShoesNo());
+        shoesRepository.modifyIno(inventory, order.getShoesNo());
 
         map.put("order", true);
         return response.success(map, "상품 주문이 완료되었습니다", HttpStatus.OK);

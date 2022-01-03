@@ -26,4 +26,8 @@ public class Pay {
         this.payCreateTime = payCreateTime;
         this.payContent = content;
     }
+
+    public void setPayNo(Long payNo){
+        this.payNo = payNo;
+    }
 }

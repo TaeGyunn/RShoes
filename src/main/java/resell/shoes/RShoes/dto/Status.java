@@ -13,7 +13,10 @@ public enum Status {
     //창고
     Inspection("INSPECTION"),   //검수
     FAIL("FAIL"),
-    PASS("PASS");
+    PASS("PASS"),
+    //상품상태,
+    SALE("SALE"),
+    SOLDOUT("SOLDOUT");
 
     private final String value;
 }

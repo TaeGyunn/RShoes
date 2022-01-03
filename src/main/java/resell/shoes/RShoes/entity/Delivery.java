@@ -1,11 +1,11 @@
 package resell.shoes.RShoes.entity;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import resell.shoes.RShoes.dto.Status;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Delivery {
 
     private Long deliveryNo;    // 배달번호
@@ -21,5 +21,8 @@ public class Delivery {
 
     public void changeStatus(Status status){
         this.status = status;
+    }
+    public void setDeliveryNo(Long deliveryNo){
+        this.deliveryNo = deliveryNo;
     }
 }

@@ -9,26 +9,18 @@
 
         <id column="ino" property="inventoryNo"/>
         <result column="status" property="inventoryStatus"/>
+        <result column="manager" property="manager"/>
+        <result column="date" property="InspectionTime"/>
 
     </resultMap>
 
 
-    <insert id="insertInventory" parameterType="Inventory">
+    <insert id="insertInventory" useGeneratedKeys="true" keyProperty="inventoryNo">
 
-        INSERT delivery(status)
+        INSERT inventory(status)
         VALUES(#{inventoryStatus})
-
-        <selectKey keyProperty="ino" resultType="Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
 
     </insert>
 
-    <update id="modifyInventory">
-        UPDATE inventory
-        SET status =
-        WHERE sno = #{shoesNo}
-
-    </update>
 
 </mapper>

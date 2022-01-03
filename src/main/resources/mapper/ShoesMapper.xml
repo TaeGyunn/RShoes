@@ -12,11 +12,19 @@
         <result column="price" property="price"/>
         <result column="color" property="color"/>
         <result column="size" property="size"/>
+        <result column="status" property="status"/>
+        <result column="cdt" property="createDateTime"/>
         <association property="brand" javaType="resell.shoes.RShoes.entity.Brand">
             <id column="bno" property="brandNo"/>
         </association>
+        <association property="inventory" javaType="resell.shoes.RShoes.entity.Inventory">
+            <id column="ino" property="inventoryNo"/>
+        </association>
         <association property="category" javaType="resell.shoes.RShoes.entity.Category">
             <id column="cno" property="categoryNo"/>
+        </association>
+        <association property="user" javaType="resell.shoes.RShoes.entity.User">
+            <id column="uno" property="userNo"/>
         </association>
 
     </resultMap>
@@ -39,8 +47,8 @@
 
     <insert id="insertShoes" useGeneratedKeys="true" keyColumn="sno" keyProperty="shoesNo">
 
-        INSERT INTO shoes(bno, cno, name, price, color, size)
-        VALUES(#{brand.brandNo}, #{category.categoryNo}, #{shoesName}, #{price}, #{color}, #{size})
+        INSERT INTO shoes(bno,uno, cno, name, price, color, size)
+        VALUES(#{brand.brandNo},#{user.userNo},#{category.categoryNo}, #{shoesName}, #{price}, #{color}, #{size})
 
 
     </insert>
@@ -62,7 +70,7 @@
     <update id="modifyIno">
 
         UPDATE shoes
-        SET ino = #{inventoryNo}
+        SET ino = #{inventory.inventoryNo}
         WHERE sno = #{shoesNo}
 
     </update>

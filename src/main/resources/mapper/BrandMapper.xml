@@ -10,16 +10,6 @@
 
         <id column="bno" property="brandNo"/>
         <result column="name" property="brandName"/>
-        <association property="user" javaType="resell.shoes.RShoes.entity.User">
-            <id column="uno" property="userNo"/>
-            <result column="id" property="id"/>
-            <result column="pw" property="pw"/>
-            <result column="email" property="email"/>
-            <result column="phone" property="phone"/>
-            <result column="bank" property="bank"/>
-            <result column="accnt" property="account"/>
-            <result column="role" property="role"/>
-        </association>
 
     </resultMap>
 

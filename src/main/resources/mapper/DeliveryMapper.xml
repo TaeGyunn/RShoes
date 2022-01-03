@@ -14,18 +14,15 @@
 
     </resultMap>
 
-    <insert id="insertDelivery" parameterType="Delivery">
+    <insert id="insertDelivery"  useGeneratedKeys="true" keyProperty="deliveryNo" >
 
         INSERT delivery(address, zip_code, status)
         VALUES(#{address}, #{zip_code}, #{status})
 
-        <selectKey keyProperty="dno" resultType="Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
 
     </insert>
 
-    <select id="findByDto" resultMap="delivery">
+    <select id="findByDno" resultMap="delivery">
 
         SELECT *
         FROM delivery d

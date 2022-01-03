@@ -1,6 +1,7 @@
 package resell.shoes.RShoes.repository;
 
 import org.springframework.stereotype.Repository;
+import resell.shoes.RShoes.entity.Inventory;
 import resell.shoes.RShoes.entity.Shoes;
 
 import java.util.List;
@@ -20,6 +21,6 @@ public interface ShoesRepository {
     // 상품삭제
     void deleteShoes(Long shoesNo);
 
-    void modifyIno(Long InventoryNo, Long shoesNo);
+    void modifyIno(Inventory inventory, Long shoesNo);
 
 }

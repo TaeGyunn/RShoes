@@ -21,7 +21,7 @@
         INSERT pay(name, type, content)
         VALUES(#{payName}, #{payType}, #{payContent})
 
-        <selectKey keyProperty="pano" resultType="Long">
+        <selectKey keyProperty="payNo" resultType="Long" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
 
