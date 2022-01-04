@@ -101,6 +101,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ResponseEntity<?> checkByEmailAndId(FindPwDTO findPwDTO) {
+
+        Map<String, Boolean> map = new HashMap<>();
+
+        if(!userRepository.checkByEmailAndId(findPwDTO.getEmail(), findPwDTO.getUserId())){
+            map.put("find",false);
+            return response.fail(map, "이메일+아이디+일치x", HttpStatus.OK);
+        }
+
+        map.put("find", true);
+        return response.success(map, "이메일+아이디+일치", HttpStatus.OK);
+
+    }
+
+    @Override
     public ResponseEntity<?> join(JoinDTO join) {
 
         Map<String, Boolean> map = new HashMap<>();

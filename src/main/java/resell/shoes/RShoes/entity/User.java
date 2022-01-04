@@ -25,6 +25,10 @@ public class User implements UserDetails {
     private String account;   // 계좌번호
     private Role role;      // 권한
 
+    public void setPw(String pw){
+        this.pw = pw;
+    }
+
 
 
     @Override

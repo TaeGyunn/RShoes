@@ -47,6 +47,31 @@
         WHERE u.email = #{email} AND u.name = #{name}
     </select>
 
+    <select id="findByEmail" resultMap="user">
+
+        SELECT *
+        FROM user u
+        WHERE u.email = #{email}
+
+    </select>
+
+    <select id="checkByEmailAndId" resultType="boolean">
+
+        SELECT IF(COUNT(*) = 1, 1, 0)
+        FROM user u
+        WHERE u.id = #{userId}
+        AND u.email = #{email}
+
+    </select>
+
+    <update id="updatePw">
+
+        UPDATE user
+        SET pw = #{pw}
+        WHERE id = #{id}
+
+    </update>
+
     <insert id="join">
         INSERT INTO user(id, pw, name, email, phone, bank, accnt)
         VALUES (#{userId}, #{pw}, #{userName},#{email}, #{phone}, #{bank}, #{account})

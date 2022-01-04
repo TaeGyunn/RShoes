@@ -26,4 +26,13 @@ public interface UserRepository {
 
     // 이메일, 이름 확인
     Optional<User> findByEmailAndName(String email, String name);
+
+    //이메일로 user찾기
+    Optional<User> findByEmail(String email);
+
+    // 비밀번호 변경하기
+    void updatePw(String pw, String id);
+
+    // 이메일, Id 확인
+    Boolean checkByEmailAndId(String email, String userId);
 }
