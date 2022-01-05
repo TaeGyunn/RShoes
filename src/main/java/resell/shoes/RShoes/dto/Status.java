@@ -16,7 +16,11 @@ public enum Status {
     PASS("PASS"),
     //상품상태,
     SALE("SALE"),
-    SOLDOUT("SOLDOUT");
+    SOLDOUT("SOLDOUT"),
+    //주문서상태
+    TRADE("TRADE"),
+    REFUND("REFUND"),
+    SUCCESS("SUCCESS");
 
     private final String value;
 }

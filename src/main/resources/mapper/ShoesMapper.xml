@@ -70,7 +70,18 @@
     <update id="modifyIno">
 
         UPDATE shoes
-        SET ino = #{inventory.inventoryNo}
+        SET
+        ino = #{inventory.inventoryNo}
+        status = #{soldout}
+        WHERE sno = #{shoesNo}
+
+    </update>
+
+    <update id="modifyStatus">
+        UPDATE shoes
+        SET
+        ino = null
+        status = #{trade}
         WHERE sno = #{shoesNo}
 
     </update>

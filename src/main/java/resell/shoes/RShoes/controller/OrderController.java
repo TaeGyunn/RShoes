@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import resell.shoes.RShoes.dto.CancelDTO;
 import resell.shoes.RShoes.dto.OrderDTO;
 import resell.shoes.RShoes.service.Helper;
 import resell.shoes.RShoes.service.OrderService;
@@ -31,6 +32,13 @@ public class OrderController {
         }
 
         return orderService.orderShoes(order);
+    }
+
+    // 주문취소
+    @PostMapping("/user/cancel")
+    public ResponseEntity<?> cancelOrder(@RequestBody CancelDTO cancel){
+
+        return orderService.cancel(cancel);
     }
 
 }

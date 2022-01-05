@@ -33,5 +33,13 @@
 
     </update>
 
+    <update id="modifyStatus2">
+
+        UPDATE inventory
+        SET status = #{status}
+        FROM ino = #{ino}
+
+    </update>
+
 
 </mapper>

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import resell.shoes.RShoes.dto.CancelDTO;
 import resell.shoes.RShoes.dto.OrderDTO;
 import resell.shoes.RShoes.dto.Status;
 import resell.shoes.RShoes.entity.*;
@@ -62,7 +63,8 @@ public class OrderServiceImpl implements OrderService {
                 shoes,
                 delivery,
                 pay,
-                order.getPayment()
+                order.getPayment(),
+                Status.TRADE
         );
 
 
@@ -72,9 +74,36 @@ public class OrderServiceImpl implements OrderService {
 
         Long inventoryNo = inventoryRepository.insertInventory(inventory);
 
-        shoesRepository.modifyIno(inventory, order.getShoesNo());
+        shoesRepository.modifyIno(inventory, order.getShoesNo(), Status.SOLDOUT);
 
         map.put("order", true);
         return response.success(map, "상품 주문이 완료되었습니다", HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> cancel(CancelDTO cancel) {
+
+        Map<String, Boolean> map = new HashMap<>();
+
+        Order_shoes order = orderRepository.findByOrder(cancel.getOrderNo());
+
+        Delivery delivery = deliveryRepository.findByDno(order.getOrderDelivery().getDeliveryNo());
+        if(!delivery.getStatus().equals("READY")){
+            map.put("cancel", false);
+            return response.fail(map, "배송이 이미 진행되어 취소가 불가능합니다", HttpStatus.BAD_REQUEST);
+        }
+        if(order.getStatus() != Status.TRADE){
+            map.put("cancel", false);
+            return response.fail(map, "환불이 불가능 합니다", HttpStatus.BAD_REQUEST);
+        }
+        Shoes shoes = shoesRepository.findByShoesNo(order.getOrderShoes().getShoesNo());
+        inventoryRepository.modifyStatus2(shoes.getInventory().getInventoryNo(), Status.FAIL.getValue());
+        shoesRepository.modifyStatus(Status.TRADE.getValue(), order.getOrderShoes().getShoesNo());
+        orderRepository.modifyStatus(Status.REFUND.getValue(), cancel.getOrderNo());
+        deliveryRepository.modifyStatus(order.getOrderDelivery().getDeliveryNo(), Status.RETURN.getValue());
+
+        map.put("cancel", true);
+
+        return response.success(map, "환불이 완료되었습니다.", HttpStatus.OK);
     }
 }

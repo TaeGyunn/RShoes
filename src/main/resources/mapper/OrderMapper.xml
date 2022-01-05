@@ -8,6 +8,7 @@
     <resultMap id="order" type="resell.shoes.RShoes.entity.Order_shoes">
 
         <id column="ono" property="orderNo"/>
+        <result column="status" property="status"/>
         <result column="payment" property="payment"/>
         <result column="date" property="orderDate"/>
         <association property="buyUser">
@@ -27,8 +28,8 @@
 
     <insert id="insertOrder">
 
-        INSERT INTO order_shoes(sno, dno, uno, pano, payment)
-        VALUES(#{orderShoes.shoesNo}, #{orderDelivery.deliveryNo}, #{buyUser.userNo}, #{orderPay.payNo}, #{payment})
+        INSERT INTO order_shoes(sno, dno, uno, pano, payment,status)
+        VALUES(#{orderShoes.shoesNo}, #{orderDelivery.deliveryNo}, #{buyUser.userNo}, #{orderPay.payNo}, #{payment},#{status})
 
     </insert>
 
@@ -40,5 +41,21 @@
 
     </select>
 
+    <select id="findByOrder" resultMap="order">
+
+        SELECT *
+        FROM order_shoes o
+        WHERE o.ono = #{orderNos}
+
+    </select>
+
+    <update id="modifyStatus">
+        UPDATE order_shoes
+        SET
+        status = #{refund}
+        WHERE ono = #{orderNo}
+
+
+    </update>
 
 </mapper>

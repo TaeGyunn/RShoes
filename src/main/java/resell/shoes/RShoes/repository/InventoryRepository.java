@@ -10,4 +10,6 @@ public interface InventoryRepository {
     Long insertInventory(Inventory inventory);
 
     void modifyStatus(Inventory inventory);
+
+    void modifyStatus2(Long ino, String status);
 }
