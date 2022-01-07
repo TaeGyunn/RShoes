@@ -1,6 +1,8 @@
 package resell.shoes.RShoes.repository;
 
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Repository;
+import resell.shoes.RShoes.dto.OrderGetDTO;
 import resell.shoes.RShoes.dto.Status;
 import resell.shoes.RShoes.entity.Order_shoes;
 
@@ -14,4 +16,6 @@ public interface OrderRepository {
     Order_shoes findByOrder(Long orderNo);
 
     void modifyStatus(String refund, Long orderNo);
+
+    Page<OrderGetDTO> findByUserId(Long userNo);
 }

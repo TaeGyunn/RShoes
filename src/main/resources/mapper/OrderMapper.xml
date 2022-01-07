@@ -26,6 +26,18 @@
 
     </resultMap>
 
+    <resultMap id="orderDTO" type="resell.shoes.RShoes.dto.OrderGetDTO">
+
+        <id column="ono" property="orderNo"/>
+        <result column="name" property="shoesName"/>
+        <result column="sno" property="shoesNo"/>
+        <result column="price" property="price"/>
+        <result column="size" property="size"/>
+        <result column="date" property="date"/>
+        <result column="status" property="status"/>
+
+    </resultMap>
+
     <insert id="insertOrder">
 
         INSERT INTO order_shoes(sno, dno, uno, pano, payment,status)
@@ -46,6 +58,16 @@
         SELECT *
         FROM order_shoes o
         WHERE o.ono = #{orderNos}
+
+    </select>
+
+    <select id="findByUserId" resultMap="orderDTO">
+
+        SELECT o.ono, s.name, s.sno, s.price, s.size, o.date, o.status
+        FROM order_shoes o
+        INNER JOIN shoes s
+        ON o.sno = s.sno
+        WHERE o.uno = #{userNo}
 
     </select>
 

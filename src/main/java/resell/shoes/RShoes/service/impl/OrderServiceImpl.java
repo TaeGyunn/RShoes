@@ -1,21 +1,24 @@
 package resell.shoes.RShoes.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import resell.shoes.RShoes.dto.CancelDTO;
-import resell.shoes.RShoes.dto.OrderDTO;
-import resell.shoes.RShoes.dto.Status;
+import resell.shoes.RShoes.dto.*;
 import resell.shoes.RShoes.entity.*;
 import resell.shoes.RShoes.repository.*;
 import resell.shoes.RShoes.service.OrderService;
+import resell.shoes.RShoes.service.S3Service;
 import resell.shoes.RShoes.util.Response;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -31,6 +34,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final InventoryRepository inventoryRepository;
     private final Response response;
+    private final PhotoRepository photoRepository;
+    private final S3Service s3Service;
 
     @Override
     public ResponseEntity<?> orderShoes(OrderDTO order) {
@@ -105,5 +110,30 @@ public class OrderServiceImpl implements OrderService {
         map.put("cancel", true);
 
         return response.success(map, "환불이 완료되었습니다.", HttpStatus.OK);
+    }
+
+    @Override
+    public Page<OrderGetDTO> getOrders(int page , String userId) {
+
+        PageHelper.startPage(page, 10);
+
+        User user = userRepository.findById(userId).orElse(null);
+
+        Page<OrderGetDTO> orders = orderRepository.findByUserId(user.getUserNo());
+
+        for(OrderGetDTO order : orders){
+            List<Photo> photos = photoRepository.findBySno(order.getShoesNo());
+            List<String> url = new ArrayList<>();
+            for(Photo photo : photos){
+                url.add(s3Service.getFileUrl(photo.getServerName()));
+            }
+            order.setUrl(url);
+        }
+        return orders;
+    }
+
+    @Override
+    public Page<PageShoesDTO> getSellShoes(int page, String userId) {
+        return null;
     }
 }

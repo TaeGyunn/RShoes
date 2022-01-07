@@ -7,6 +7,6 @@ public class CancelDTO {
 
     private String userId; //주문자 ID
 
-    private Long orderNo;
+    private Long orderNo;   //주문 No
 
 }
