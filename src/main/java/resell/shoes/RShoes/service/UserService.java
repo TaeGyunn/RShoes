@@ -1,14 +1,13 @@
 package resell.shoes.RShoes.service;
 
 import org.springframework.http.ResponseEntity;
-import resell.shoes.RShoes.dto.FindPwDTO;
-import resell.shoes.RShoes.dto.JoinDTO;
-import resell.shoes.RShoes.dto.LoginDTO;
-import resell.shoes.RShoes.dto.MailDTO;
+import resell.shoes.RShoes.dto.*;
 
 public interface UserService {
 
     ResponseEntity<?> login(LoginDTO login);
+
+    ResponseEntity<?> logout(LogoutDTO logout);
 
     ResponseEntity<?> join(JoinDTO join);
 

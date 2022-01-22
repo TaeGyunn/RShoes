@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Transactional
@@ -145,6 +146,20 @@ public class UserServiceImpl implements UserService {
         UserResponseDTO.TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
 
         return response.success(tokenInfo, "로그인 성공하였습니다.", HttpStatus.OK);
+
+    }
+
+    @Override
+    public ResponseEntity<?> logout(LogoutDTO logout) {
+
+        if (!jwtTokenProvider.validateToken(logout.getAccessToken())) {
+            return response.fail("잘못된 요청입니다.", HttpStatus.BAD_REQUEST);
+        }
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(logout.getAccessToken());
+
+
+        return response.success("로그아웃 되었습니다.");
 
     }
 
